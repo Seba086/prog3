@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class MySimpleLinkedList {
 	protected Node first;
+	private Node last;
 	private int size = 0;
 
 	public MySimpleLinkedList() {
@@ -12,10 +13,23 @@ public class MySimpleLinkedList {
 	public boolean isEmpty() {
 		return first == null;
 	}
+	
+	public void insert(String s, Integer i) {
 
-	public void insert(String s) {
+		Node nodo = new Node(null, s, i);
+		if (first == null) {
+			first = nodo;
+			last = first;
+		} else {
+			last.setNext(nodo);
+			last = last.getNext();
+		}
+		size++;
+	}
 
-		Node nodo = new Node(null, s);
+	public void insertOrdenado(String s, Integer i) {
+
+		Node nodo = new Node(null, s, i);
 		if (first == null) {
 			first = nodo;
 		} else {
@@ -33,7 +47,6 @@ public class MySimpleLinkedList {
 		}
 		size++;
 	}
-
 	
 	// ELIMINA UN NODO POR POSICION, Y VINCULA EL ANTERIOR CON EL SIGUIENTE
 	public void deleteElement(int pos) {
@@ -75,13 +88,104 @@ public class MySimpleLinkedList {
 		return size;
 	}
 	
-	public void printNode(int pos){
-		System.out.println(at(pos).getInfo());
-	}
 	public void insertElementAlPrincipio(String s){
 		Node nodo = new Node(null, s);
 		nodo.setNext(first);
 		first = nodo;
-		size++;;
+		size++;
+	}
+	
+	public int getMax(){
+		int maximo = 0;
+		int pos = 0;
+		
+		for(int i=0; i<size; i++){
+			Node nodo = at(i);
+			if(maximo<nodo.getNro()){
+				maximo = nodo.getNro();
+				pos = i;
+			}
+			
+		}
+		return pos;
+	}
+	public void sortByString(){
+		Node nodoActual = first;
+		Node nodoTemp;
+		Node nodoSig;
+		for(int i = 0; i < size; i++){
+			while ((nodoActual.getNext() != null)){
+				nodoSig = nodoActual.getNext();
+				if(nodoActual.compareToSt(nodoSig) > 0){
+					nodoTemp = nodoActual;
+					nodoActual = nodoSig;
+					nodoTemp.setNext(nodoSig.getNext());
+					nodoActual.setNext(nodoTemp);
+				}
+			}
+		}
+	}
+	public void sortByNro(){
+		Node nodoActual = first;
+		Node nodoTemp;
+		Node nodoSig;
+		
+		for(int i = 0; i < size-1; i++){
+			for(int j = 0; j < size-i-1; j++){
+				nodoSig = nodoActual.getNext();
+				if(nodoActual.compareToInt(nodoSig) > 0){
+					nodoTemp = nodoSig;
+					nodoActual.setNext(nodoSig.getNext());
+					nodoSig.setNext(nodoTemp);
+					nodoActual.setNext(nodoSig);
+				}
+			}
+			nodoActual = nodoActual.getNext();
+		}
+		/*if(first.getNext()!=null){
+		//	for(int i = 0; i < size; i++){
+				nodoSig = nodoActual.getNext();
+				while ((nodoSig.getNro() != null)){
+					if(nodoActual.compareToInt(nodoSig) > 0){
+						nodoTemp = nodoSig;
+						nodoActual.setNext(nodoSig); = nodoSig;
+						nodoTemp.setNext(nodoSig.getNext());
+						nodoActual.setNext(nodoTemp);
+					}
+					nodoActual = nodoSig;
+				}
+				
+			}
+		}
+	}
+*/	
+	
+
+	}
+		public void sortList(MySimpleLinkedList list){
+		
+	}
+	
+	public void mergeSort(MySimpleLinkedList list1, MySimpleLinkedList list2){
+		
+	}
+	
+	public void printListByInfo(){
+		if(first != null){
+			Node nodo = first;
+			while(nodo.getNext() != null){
+				nodo.printNodeByInfo();
+				nodo = nodo.getNext();
+			}
+		}
+	}
+	public void printListByNro(){
+		if(first != null){
+			Node nodo = first;
+			while(nodo.getNext() != null){
+				nodo.printNodeByNro();
+				nodo = nodo.getNext();
+			}
+		}
 	}
 }
