@@ -1,11 +1,10 @@
-import java.util.ArrayList;
 
-public class MySimpleLinkedList {
-	protected Node first;
-	private Node last;
+public class DoubleLinkedList {
+	protected DoubleNode first;
+	private DoubleNode last;
 	private int size = 0;
 
-	public MySimpleLinkedList() {
+	public DoubleLinkedList() {
 		first = null;
 
 	}
@@ -16,62 +15,20 @@ public class MySimpleLinkedList {
 	
 	public void insert(String s, Integer i) {
 
-		Node nodo = new Node(null, s, i);
+		DoubleNode nodo = new DoubleNode(null,null, s, i);
 		if (first == null) {
 			first = nodo;
 			last = first;
 		} else {
+			nodo.setPrev(last);//DOUBLENODE
 			last.setNext(nodo);
-			last = nodo; //decía last.getNext();
+			last = nodo;
 		}
 		size++;
 	}
 
-	public void insertOrdenado(String s, Integer i) {
-
-		Node nodo = new Node(null, s, i);
-		if (first == null) {
-			first = nodo;
-		} else {
-			if (s.compareTo(first.getInfo()) < 0) {
-				nodo.setNext(first);
-				first = nodo;
-			} else {
-				Node nodoActual = first;
-				while ((nodoActual.getNext() != null) && (s.compareTo(nodoActual.getNext().getInfo()) > 0)) {
-					nodoActual = nodoActual.getNext();
-				}
-				nodo.setNext(nodoActual.getNext());
-				nodoActual.setNext(nodo);
-			}
-		}
-		size++;
-	}
-	
-	// ELIMINA UN NODO POR POSICION, Y VINCULA EL ANTERIOR CON EL SIGUIENTE
-	public void deleteElement(int pos) {
-		// Node tmp;
-		if (size - 1 > pos && first == null) {
-			System.out.println("No borré nada"); // Si la lista esta vacía
-		} else if (pos == 0) { // Si borro el primero de la lista, el segundo se
-								// vuelve el primero
-			first = first.getNext();
-			size--;
-		} else {
-			if (size > pos || first == null) {
-				Node nodo = at(pos - 1);
-				if (nodo != null) {
-					nodo.setNext(nodo.getNext().getNext());
-					size--;
-				}
-			}
-			else System.out.println("No hay nada en esa posición");
-		}
-
-	}
-
-	public Node at(int pos) {
-		Node nodo = null;
+	public DoubleNode at(int pos) {
+		DoubleNode nodo = null;
 		if (size < pos - 1 || first == null) {
 			System.out.println("No hay nada en esa posiciòn");
 		} else {
@@ -84,9 +41,58 @@ public class MySimpleLinkedList {
 	}
 
 	public int getSize() {
-		// TODO Auto-generated method stub
 		return size;
 	}
+	// ELIMINA UN NODO POR POSICION, Y VINCULA EL ANTERIOR CON EL SIGUIENTE Y VICEVERSA
+		public void deleteElement(int pos) {
+			// Node tmp;
+			if (size - 1 > pos && first == null) { //revisar issue #1
+				System.out.println("No borré nada"); // Si la lista esta vacía
+			} else if (pos == 0) { // Si borro el primero de la lista, el segundo se
+									// vuelve el primero
+				first = first.getNext();
+				first.setPrev(null);//DOUBLENODE
+				size--;
+			} else {
+				if (size > pos || first == null) {
+					DoubleNode nodo = at(pos - 1);
+					if (nodo != null) {
+						nodo.getNext().getNext().setPrev(nodo);;//DOUBLENODE
+						nodo.setNext(nodo.getNext().getNext());
+						size--;
+					}
+				}
+				else System.out.println("No hay nada en esa posición");
+			}
+
+		}
+	
+	public void insertOrdenado(String s, Integer i) {
+
+		DoubleNode nodo = new DoubleNode(null,null, s, i);
+		if (first == null) {
+			first = nodo;
+		} else {
+			if (s.compareTo(first.getInfo()) < 0) {
+				first.setPrev(nodo); //DOUBLENODE
+				nodo.setNext(first);
+				first = nodo;
+			} else {
+				DoubleNode nodoActual = first;
+				while ((nodoActual.getNext() != null) && (s.compareTo(nodoActual.getNext().getInfo()) > 0)) {
+					nodoActual = nodoActual.getNext();
+				}
+				nodoActual.getNext().setPrev(nodo);//DOUBLENODE
+				nodo.setNext(nodoActual.getNext());
+				nodo.setPrev(nodoActual);//DOUBLENODE
+				nodoActual.setNext(nodo);
+			}
+		}
+		size++;
+	}
+	
+	
+	/*
 	
 	public void insertElementAlPrincipio(String s){
 		Node nodo = new Node(null, s);
@@ -142,23 +148,7 @@ public class MySimpleLinkedList {
 			}
 			nodoActual = nodoActual.getNext();
 		}
-		/*if(first.getNext()!=null){
-		//	for(int i = 0; i < size; i++){
-				nodoSig = nodoActual.getNext();
-				while ((nodoSig.getNro() != null)){
-					if(nodoActual.compareToInt(nodoSig) > 0){
-						nodoTemp = nodoSig;
-						nodoActual.setNext(nodoSig); = nodoSig;
-						nodoTemp.setNext(nodoSig.getNext());
-						nodoActual.setNext(nodoTemp);
-					}
-					nodoActual = nodoSig;
-				}
-				
-			}
-		}
-	}
-*/	
+		
 	
 
 	}
@@ -187,5 +177,5 @@ public class MySimpleLinkedList {
 				nodo = nodo.getNext();
 			}
 		}
-	}
+	}*/
 }
