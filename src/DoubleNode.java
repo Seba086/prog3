@@ -4,7 +4,7 @@ public class DoubleNode {
 	private DoubleNode next, prev;
 	private Integer nro;
 
-	public DoubleNode(DoubleNode n,DoubleNode p, String st, int num) {
+	public DoubleNode(DoubleNode n,DoubleNode p, String st, int num) { //ahora sabe el anterior y el siguiente
 		prev = p;
 		next = n;
 		info = st;

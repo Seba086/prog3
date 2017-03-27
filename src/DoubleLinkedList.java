@@ -20,7 +20,7 @@ public class DoubleLinkedList {
 			first = nodo;
 			last = first;
 		} else {
-			nodo.setPrev(last);//DOUBLENODE
+			nodo.setPrev(last);//DOUBLENODE.
 			last.setNext(nodo);
 			last = nodo;
 		}
@@ -62,7 +62,7 @@ public class DoubleLinkedList {
 						size--;
 					}
 				}
-				else System.out.println("No hay nada en esa posición");
+				else System.out.println("No hay nada en esa posición"); //
 			}
 
 		}
