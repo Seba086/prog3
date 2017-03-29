@@ -9,16 +9,44 @@ public class main {
 
 	public static void main(String[] args) {
 
-		MySimpleLinkedList listaSimple = new MySimpleLinkedList();
+		//MySimpleLinkedList listaSimple = new MySimpleLinkedList();
+		Pila pila = new Pila();
+		String s = "hola";
+		String a = "hola2";
+		String b = "hola3";
+		String c = "hola4";
+		
+		pila.apilar(s);
+		pila.apilar(a);
+		pila.apilar(b);
+		pila.apilar(c);
 		ArrayList<String> array = new ArrayList();
-		/*
+		System.out.println(pila.tope());
+		pila.desapilar();
+		System.out.println(pila.tope());
+		pila.desapilar();
+		System.out.println(pila.tope());
+		pila.desapilar();
+		System.out.println(pila.tope());
+		pila.desapilar();
+		/*for (int i = 0; i < 20; i++) {
+			
+			Node nodo = new Node("ejercicio3algo" + i, (int)(Math.random()*20)+1);
+			pila.apilar(nodo);
+			array.add("puntito" + i);
+		}
+		listaSimple.printListRecursivo(listaSimple.at(0));
+		System.out.println(listaSimple.at(5).getInfo());
+		listaSimple.printListRecursivo(listaSimple.at(5));
+		
+		
 		 * listaSimple.insert("elem1"); listaSimple.insert("elem8");
 		 * listaSimple.insert("delem3"); listaSimple.insert("elem4");
 		 * listaSimple.insert("elem2"); listaSimple.insert("felem3");
 		 * listaSimple.insert("elem3"); listaSimple.deleteElement(111);
 		 * listaSimple.insertElementAlPrincipio("yo voy primero");
 		 * listaSimple.insertElementAlPrincipio("no, yo, yo voy primero");
-		 */
+		 
 		for (int i = 0; i < 20; i++) {
 			listaSimple.insert("puntito" + i, (int)(Math.random()*20)+1);
 			array.add("puntito" + i);
@@ -28,11 +56,11 @@ public class main {
 		listaSimple.sortByNro();
 		System.out.println("ahora ordenado:");
 		listaSimple.printListByNro();
-		
-		/*for (int i = 0; i < listaSimple.getSize(); i++) {
+		listaSimple.printListRecursivo(listaSimple.at(0));
+		for (int i = 0; i < listaSimple.getSize(); i++) {
 			System.out.println(array.get(i));
 		}
-
+	
 		DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date inicioNodo = new Date();
 		System.out.println(listaSimple.at(10000));

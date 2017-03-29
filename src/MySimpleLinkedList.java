@@ -188,4 +188,35 @@ public class MySimpleLinkedList {
 			}
 		}
 	}
+	public void printListRecursivo(Node nodo){
+		if(nodo != null){
+			System.out.println(nodo.getInfo() +" " +nodo.getNro());
+			if(nodo.getNext() != null){
+				this.printListRecursivo(nodo.getNext());
+			}
+		}
+	}
+
+	public void addElementByPos(String s, int pos) {
+		Node n = new Node(null,s);
+		if (pos == 0){
+			if (first == null) {
+				first = n;
+				last = first;
+			} else {
+				n.setNext(first);
+				first = n; 
+			}
+			
+		}else {
+			Node nodo = this.at(pos-1);
+			if (nodo != null) {
+				n.setNext(nodo.getNext());
+				nodo.setNext(n);
+			}
+		}
+		
+		
+		size++;	
+	}
 }

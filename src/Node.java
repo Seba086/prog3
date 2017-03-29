@@ -3,17 +3,18 @@ public class Node {
 	private String info;
 	private Node next;
 	private Integer nro;
-
+	
+	public Node(Node n, String st) {
+		next = n;
+		info = st;
+	}
 	public Node(Node n, String st, int num) {
 		next = n;
 		info = st;
 		nro = num;
 	}
 
-	public Node(Node n, String st) {
-		next = n;
-		info = st;
-	}
+	
 
 	public Node(Node n, int i) {
 		next = n;
